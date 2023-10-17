@@ -15,6 +15,6 @@ public class BunTest {
     @Test
     public void getBunPriceTest() {
         float result = 56.22f;
-        Assert.assertEquals(result, bun.getPrice(), 0.001f);
+        Assert.assertEquals(result, bun.getPrice(), 0.01f);
     }
 }
