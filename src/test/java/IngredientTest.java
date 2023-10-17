@@ -6,11 +6,11 @@ import static praktikum.IngredientType.*;
 
 
 public class IngredientTest {
-    Ingredient ingredient = new Ingredient(SAUCE, "hot sauce", 100);
+    Ingredient ingredient = new Ingredient(SAUCE, "hot sauce", 56.22f);
 
     @Test
     public void getIngredientPriceTest() {
-        float result = 100;
+        float result = 56.22f;
         Assert.assertEquals(result, ingredient.getPrice(), 0.001f);
     }
 
