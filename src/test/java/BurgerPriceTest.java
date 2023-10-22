@@ -1,4 +1,3 @@
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -58,10 +57,5 @@ public class BurgerPriceTest {
         burger.addIngredient(secondIngredient);
         Mockito.when(bun.getPrice()).thenReturn(200F);
         Assert.assertEquals(totalPrice, burger.getPrice(), 0.001f);
-    }
-
-    @After
-    public void tearDown() {
-        burger = null;
     }
 }

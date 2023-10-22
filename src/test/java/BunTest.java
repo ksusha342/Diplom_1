@@ -1,10 +1,17 @@
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import praktikum.Bun;
 
 
 public class BunTest {
-    Bun bun = new Bun("white bun", 56.22f);
+    private static Bun bun;
+
+    @BeforeClass
+    public static void createBun() {
+        bun = new Bun("white bun", 56.22f);
+    }
+
 
     @Test
     public void getBunNameTest() {

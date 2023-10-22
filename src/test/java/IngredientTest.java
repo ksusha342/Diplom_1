@@ -1,3 +1,4 @@
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.Assert;
 import praktikum.Ingredient;
@@ -6,7 +7,12 @@ import static praktikum.IngredientType.*;
 
 
 public class IngredientTest {
-    Ingredient ingredient = new Ingredient(SAUCE, "hot sauce", 56.22f);
+    private static Ingredient ingredient;
+
+    @BeforeClass
+    public static void createIngredient() {
+        ingredient = new Ingredient(SAUCE, "hot sauce", 56.22f);
+    }
 
     @Test
     public void getIngredientPriceTest() {

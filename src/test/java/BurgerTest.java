@@ -1,7 +1,4 @@
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.Assert;
+import org.junit.*;
 import praktikum.Burger;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -12,8 +9,15 @@ import static praktikum.IngredientType.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BurgerTest {
-
     private Burger burger;
+    private static Ingredient firstIngredient;
+    private static Ingredient secondIngredient;
+
+    @BeforeClass
+    public static void createIngredients() {
+        firstIngredient = new Ingredient(FILLING, "cutlet", 100);
+        secondIngredient = new Ingredient(SAUCE, "chili sauce", 300);
+    }
 
     @Before
     public void setUp() {
@@ -22,45 +26,27 @@ public class BurgerTest {
 
     @Test
     public void checkIngredientPresenceAfterAdditionTest() {
-        Ingredient ingredient = new Ingredient(FILLING, "cutlet", 100);
-        burger.addIngredient(ingredient);
-        Assert.assertTrue(burger.ingredients.contains(ingredient));
+        burger.addIngredient(firstIngredient);
+        Assert.assertTrue(burger.ingredients.contains(firstIngredient));
     }
 
     @Test
     public void checkBurgerSizeAfterAddingIngredientsTest() {
-        Ingredient firstIngredient = new Ingredient(FILLING, "cutlet", 100);
-        Ingredient secondIngredient = new Ingredient(SAUCE, "chili sauce", 300);
         burger.addIngredient(firstIngredient);
-        burger.addIngredient(secondIngredient);
-        int expectedSize = 2;
+        int expectedSize = 1;
         Assert.assertEquals(expectedSize, burger.ingredients.size());
     }
 
     @Test
     public void checkBurgerSizeAfterRemovingIngredientTest() {
-        Ingredient firstIngredient = new Ingredient(FILLING, "cutlet", 100);
-        Ingredient secondIngredient = new Ingredient(SAUCE, "chili sauce", 300);
         burger.addIngredient(firstIngredient);
-        burger.addIngredient(secondIngredient);
-        burger.removeIngredient(1);
-        int expectedSize = 1;
+        burger.removeIngredient(0);
+        int expectedSize = 0;
         Assert.assertEquals(expectedSize, burger.ingredients.size());
-    }
-    @Test
-    public void checkIngredientPresenceAfterRemovingIngredientTest() {
-        Ingredient firstIngredient = new Ingredient(FILLING, "cutlet", 100);
-        Ingredient secondIngredient = new Ingredient(SAUCE, "chili sauce", 300);
-        burger.addIngredient(firstIngredient);
-        burger.addIngredient(secondIngredient);
-        burger.removeIngredient(1);
-        Assert.assertTrue(burger.ingredients.contains(firstIngredient));
     }
 
     @Test
     public void checkIngredientOrderAfterMovingIngredientTest() {
-        Ingredient firstIngredient = new Ingredient(FILLING, "cutlet", 100);
-        Ingredient secondIngredient = new Ingredient(SAUCE, "chili sauce", 300);
         burger.addIngredient(firstIngredient);
         burger.addIngredient(secondIngredient);
         burger.moveIngredient(0, 1);
@@ -69,17 +55,10 @@ public class BurgerTest {
 
     @Test
     public void checkBurgerSizeAfterMovingIngredientTest() {
-        Ingredient firstIngredient = new Ingredient(FILLING, "cutlet", 100);
-        Ingredient secondIngredient = new Ingredient(SAUCE, "chili sauce", 300);
         burger.addIngredient(firstIngredient);
         burger.addIngredient(secondIngredient);
         burger.moveIngredient(0, 1);
         int expectedSize = 2;
         Assert.assertEquals(expectedSize, burger.ingredients.size());
-    }
-
-    @After
-    public void tearDown() {
-        burger = null;
     }
 }
