@@ -10,6 +10,7 @@ import praktikum.Bun;
 import praktikum.Burger;
 import praktikum.Ingredient;
 
+import static praktikum.Constants.DELTA;
 import static praktikum.IngredientType.*;
 
 
@@ -56,6 +57,6 @@ public class BurgerPriceTest {
         burger.addIngredient(firstIngredient);
         burger.addIngredient(secondIngredient);
         Mockito.when(bun.getPrice()).thenReturn(200F);
-        Assert.assertEquals(totalPrice, burger.getPrice(), 0.001f);
+        Assert.assertEquals(totalPrice, burger.getPrice(), DELTA);
     }
 }

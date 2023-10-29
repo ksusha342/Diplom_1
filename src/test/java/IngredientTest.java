@@ -3,6 +3,7 @@ import org.junit.Test;
 import org.junit.Assert;
 import praktikum.Ingredient;
 
+import static praktikum.Constants.DELTA;
 import static praktikum.IngredientType.*;
 
 
@@ -17,7 +18,7 @@ public class IngredientTest {
     @Test
     public void getIngredientPriceTest() {
         float result = 56.22f;
-        Assert.assertEquals(result, ingredient.getPrice(), 0.001f);
+        Assert.assertEquals(result, ingredient.getPrice(), DELTA);
     }
 
     @Test
