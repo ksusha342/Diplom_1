@@ -1,23 +1,19 @@
 import org.junit.*;
+import org.mockito.Mock;
 import praktikum.Burger;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 import praktikum.Ingredient;
 
-import static praktikum.IngredientType.*;
-
 
 @RunWith(MockitoJUnitRunner.class)
 public class BurgerTest {
     private Burger burger;
-    private static Ingredient firstIngredient;
-    private static Ingredient secondIngredient;
 
-    @BeforeClass
-    public static void createIngredients() {
-        firstIngredient = new Ingredient(FILLING, "cutlet", 100);
-        secondIngredient = new Ingredient(SAUCE, "chili sauce", 300);
-    }
+    @Mock
+    Ingredient firstIngredient;
+    @Mock
+    Ingredient secondIngredient;
 
     @Before
     public void setUp() {
@@ -27,7 +23,7 @@ public class BurgerTest {
     @Test
     public void checkIngredientPresenceAfterAdditionTest() {
         burger.addIngredient(firstIngredient);
-        Assert.assertTrue(burger.ingredients.contains(firstIngredient));
+        Assert.assertEquals(firstIngredient, burger.ingredients.get(0));
     }
 
     @Test
