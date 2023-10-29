@@ -11,7 +11,6 @@ import praktikum.Burger;
 import praktikum.Ingredient;
 
 import static praktikum.Constants.DELTA;
-import static praktikum.IngredientType.*;
 
 
 @RunWith(Parameterized.class)
@@ -19,23 +18,28 @@ public class BurgerPriceTest {
 
     private Burger burger;
 
-    public float firstIngredientPrise;
-    public float secondIngredientPrise;
+    public float firstIngredientPrice;
+    public float secondIngredientPrice;
     public float totalPrice;
 
-    public BurgerPriceTest(float firstIngredientPrise, float secondIngredientPrise, float totalPrice) {
-        this.firstIngredientPrise = firstIngredientPrise;
-        this.secondIngredientPrise = secondIngredientPrise;
+    public BurgerPriceTest(float firstIngredientPrice, float secondIngredientPrice, float totalPrice) {
+        this.firstIngredientPrice = firstIngredientPrice;
+        this.secondIngredientPrice = secondIngredientPrice;
         this.totalPrice = totalPrice;
     }
 
     @Mock
     Bun bun;
+    @Mock
+    Ingredient firstIngredient;
+    @Mock
+    Ingredient secondIngredient;
 
     @Before
     public void setUp() {
         burger = new Burger();
         MockitoAnnotations.initMocks(this);
+
     }
 
     @Parameterized.Parameters
@@ -51,12 +55,14 @@ public class BurgerPriceTest {
 
     @Test
     public void getBurgerPriceTest() {
-        Ingredient firstIngredient = new Ingredient(FILLING, "cutlet", firstIngredientPrise);
-        Ingredient secondIngredient = new Ingredient(SAUCE, "chili sauce", secondIngredientPrise);
         burger.setBuns(bun);
         burger.addIngredient(firstIngredient);
         burger.addIngredient(secondIngredient);
+
         Mockito.when(bun.getPrice()).thenReturn(200F);
+        Mockito.when(firstIngredient.getPrice()).thenReturn(firstIngredientPrice);
+        Mockito.when(secondIngredient.getPrice()).thenReturn(secondIngredientPrice);
+
         Assert.assertEquals(totalPrice, burger.getPrice(), DELTA);
     }
 }
